@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-
 import java.util.List;
 
 
@@ -22,10 +21,10 @@ public abstract class Flight {
     private int id;
 
     @Column
-    private  double price;
+    private double price;
 
     @Column
-    private   double businessExtra;
+    private double businessExtra;
 
     @Column
     private int passengerCount;
