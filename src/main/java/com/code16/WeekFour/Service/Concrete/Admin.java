@@ -4,33 +4,19 @@ import com.code16.WeekFour.Entity.Flight.Flight;
 import com.code16.WeekFour.Entity.Flight.Pegasus;
 import com.code16.WeekFour.Entity.Flight.Thy;
 import com.code16.WeekFour.Repository.FlightRepository;
-import com.code16.WeekFour.Service.Contrats.FlightService;
-import com.code16.WeekFour.Service.Contrats.PegasusService;
-import com.code16.WeekFour.Service.Contrats.THYService;
-import lombok.RequiredArgsConstructor;
+import com.code16.WeekFour.Service.Contrats.Admin.AdminFlightService;
+import com.code16.WeekFour.Service.Contrats.Admin.AdminPegasusService;
+import com.code16.WeekFour.Service.Contrats.Admin.AdminTHYService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
-@RequiredArgsConstructor
 @Service
-public class Admin implements FlightService, THYService, PegasusService {
-    private final FlightRepository flightRepository;
+public class Admin extends User implements AdminFlightService, AdminTHYService, AdminPegasusService {
 
 
-    @Override
-    public List<Flight> getAll() {
-        return this.flightRepository.findAll();
-
+    public Admin(FlightRepository flightRepository) {
+        super(flightRepository);
     }
-
-    @Override
-    public Flight getById(int id) {
-        Optional<Flight> flight = this.flightRepository.findById(id);
-        return flight.orElse(null);
-    }
-
 
     @Override
     public void delete(int id) {
@@ -48,16 +34,6 @@ public class Admin implements FlightService, THYService, PegasusService {
         this.flightRepository.save(pegasus);
     }
 
-    @Override
-    public List<Pegasus> getAllPegasus() {
-        return this.flightRepository.findAll(new Pegasus());
-    }
-
-    @Override
-    public Pegasus getPegasusById(int id) {
-        Optional<Pegasus> pegasus = Optional.ofNullable(this.flightRepository.findPegasusById(id));
-        return pegasus.orElse(null);
-    }
 
     @Override
     public void deletePegasus(int id) {
@@ -75,16 +51,6 @@ public class Admin implements FlightService, THYService, PegasusService {
         this.flightRepository.save(thy);
     }
 
-    @Override
-    public List<Thy> getAllTHY() {
-        return this.flightRepository.findAll(new Thy());
-    }
-
-    @Override
-    public Thy getTHYById(int id) {
-        Optional<Thy> thy = Optional.ofNullable(this.flightRepository.findTHYById(id));
-        return thy.orElse(null);
-    }
 
     @Override
     public void deleteTHY(int id) {

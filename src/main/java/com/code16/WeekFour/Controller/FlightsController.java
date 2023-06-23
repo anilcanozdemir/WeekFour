@@ -3,9 +3,12 @@ package com.code16.WeekFour.Controller;
 import com.code16.WeekFour.Entity.Flight.Flight;
 import com.code16.WeekFour.Entity.Flight.Pegasus;
 import com.code16.WeekFour.Entity.Flight.Thy;
-import com.code16.WeekFour.Service.Contrats.FlightService;
-import com.code16.WeekFour.Service.Contrats.PegasusService;
-import com.code16.WeekFour.Service.Contrats.THYService;
+import com.code16.WeekFour.Service.Contrats.Admin.AdminFlightService;
+import com.code16.WeekFour.Service.Contrats.Admin.AdminPegasusService;
+import com.code16.WeekFour.Service.Contrats.Admin.AdminTHYService;
+import com.code16.WeekFour.Service.Contrats.User.UserFlightService;
+import com.code16.WeekFour.Service.Contrats.User.UserPegasusService;
+import com.code16.WeekFour.Service.Contrats.User.UserTHYService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +18,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class FlightsController {
-    private final FlightService flightService;
-    private final PegasusService pegasusService;
-    private final THYService thyService;
+    private final AdminFlightService adminFlightService;
+    private final AdminPegasusService adminPegasusService;
+    private final AdminTHYService adminTHYService;
+    private final UserTHYService userTHYService;
+    private final UserPegasusService userPegasusService;
+    private final UserFlightService userFlightService;
 
 /*
     @PostMapping("/add")
@@ -31,17 +37,17 @@ public class FlightsController {
 
     @GetMapping("/getAll")
     public List<Flight> getAll() {
-        return this.flightService.getAll();
+        return this.userFlightService.getAll();
     }
 
     @GetMapping("/getById")
     public Flight getByid(@RequestParam int id) {
-        return this.flightService.getById(id);
+        return this.userFlightService.getById(id);
     }
 
     @PostMapping("/delete")
     public void delete(@RequestParam int id) {
-        this.flightService.delete(id);
+        this.adminFlightService.delete(id);
     }
 
     /*
@@ -49,22 +55,22 @@ public class FlightsController {
      */
     @PostMapping("/addPegasus")
     public void add(@RequestBody Pegasus pegasus) {
-        this.pegasusService.addPegasus(pegasus);
+        this.adminPegasusService.addPegasus(pegasus);
     }
 
     @GetMapping("/getAllPegasus")
     public List<Pegasus> getAllPegasus() {
-        return this.pegasusService.getAllPegasus();
+        return this.userPegasusService.getAllPegasus();
     }
 
     @GetMapping("/getPegasusById")
     public Flight getPegasusByid(@RequestParam int id) {
-        return this.pegasusService.getPegasusById(id);
+        return this.userPegasusService.getPegasusById(id);
     }
 
     @PostMapping("/deletePegasus")
     public void deletePegasus(@RequestParam int id) {
-        this.pegasusService.deletePegasus(id);
+        this.adminPegasusService.deletePegasus(id);
     }
 
     /*
@@ -72,21 +78,21 @@ public class FlightsController {
      */
     @PostMapping("/addTHY")
     public void add(@RequestBody Thy thy) {
-        this.thyService.addTHY(thy);
+        this.adminTHYService.addTHY(thy);
     }
 
     @GetMapping("/getAllTHY")
     public List<Thy> getAllThy() {
-        return this.thyService.getAllTHY();
+        return this.userTHYService.getAllTHY();
     }
 
     @GetMapping("/getTHYById")
     public Flight getThyByid(@RequestParam int id) {
-        return this.thyService.getTHYById(id);
+        return this.userTHYService.getTHYById(id);
     }
 
     @PostMapping("/deleteTHY")
     public void deleteThy(@RequestParam int id) {
-        this.thyService.deleteTHY(id);
+        this.adminTHYService.deleteTHY(id);
     }
 }
