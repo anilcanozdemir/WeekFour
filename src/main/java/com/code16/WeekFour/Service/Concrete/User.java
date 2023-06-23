@@ -13,14 +13,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-;
 
 
 @RequiredArgsConstructor
 @Service
 public class User implements UserFlightService, UserTHYService, UserPegasusService {
 
-    final FlightRepository flightRepository;
+    private final FlightRepository flightRepository;
 
     @Override
     public List<Flight> getAll() {

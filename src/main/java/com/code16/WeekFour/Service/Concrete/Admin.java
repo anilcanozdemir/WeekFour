@@ -7,16 +7,15 @@ import com.code16.WeekFour.Repository.FlightRepository;
 import com.code16.WeekFour.Service.Contrats.Admin.AdminFlightService;
 import com.code16.WeekFour.Service.Contrats.Admin.AdminPegasusService;
 import com.code16.WeekFour.Service.Contrats.Admin.AdminTHYService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
+@RequiredArgsConstructor
 @Service
-public class Admin extends User implements AdminFlightService, AdminTHYService, AdminPegasusService {
+public class Admin  implements AdminFlightService, AdminTHYService, AdminPegasusService {
 
 
-    public Admin(FlightRepository flightRepository) {
-        super(flightRepository);
-    }
+    private final FlightRepository flightRepository;
 
     @Override
     public void delete(int id) {
